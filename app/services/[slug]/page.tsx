@@ -15,7 +15,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SERVICES, getService, ALL_SERVICE_SLUGS } from '@/lib/services';
 import { FEATURED_BOROUGHS, BOROUGHS } from '@/lib/boroughs';
-import { RETAINERS, PROJECTS, formatGBP, calcSavingsVsMarket } from '@/lib/pricing';
+import { RETAINERS, PROJECTS } from '@/lib/pricing';
 import { serviceSchema, faqSchema, breadcrumbSchema, jsonLd } from '@/lib/schema';
 import PricingCards from '@/components/PricingCards';
 import InternalLinks from '@/components/InternalLinks';
@@ -159,8 +159,6 @@ export default async function ServicePage(
           <PricingCards
             retainers={serviceRetainers}
             projects={serviceProjects}
-            formatGBP={formatGBP}
-            calcSavings={calcSavingsVsMarket}
           />
 
           <div style={{ textAlign: 'center', marginTop: '32px' }}>

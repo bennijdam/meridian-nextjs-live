@@ -31,8 +31,6 @@ type Props = {
   retainers: Retainer[];
   projects: Project[];
   borough?: string;
-  formatGBP: (n: number) => string;
-  calcSavings: (ours: number, market: number) => number;
 };
 
 type BillingCycle = 'payg' | 'monthly' | 'annual';
@@ -43,8 +41,14 @@ const CYCLE_LABELS: Record<BillingCycle, string> = {
   annual: 'Annual (save 17%)',
 };
 
-export default function PricingCards({ retainers, projects, borough, formatGBP, calcSavings }: Props) {
+export default function PricingCards({ retainers, projects, borough }: Props) {
   const [cycle, setCycle] = useState<BillingCycle>('payg');
+
+  const formatGBP = (n: number) => `£${n.toLocaleString('en-GB')}`;
+  const calcSavings = (ours: number, market: number) => {
+    if (!market || market <= 0) return 0;
+    return Math.round(((market - ours) / market) * 100);
+  };
 
   const getPrice = (r: Retainer) => {
     if (cycle === 'annual') return r.annualMonthly;
