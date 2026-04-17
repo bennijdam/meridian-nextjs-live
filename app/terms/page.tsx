@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 
 const COMPANY = 'Meridian Digital Ltd';
 const COMPANY_NO = '09876543';
-const SITE = 'meridian.london';
-const EMAIL = 'hello@meridian.london';
+const SITE = 'www.meridianweb.co.uk';
+const EMAIL = 'hello@meridianweb.co.uk';
 const ADDRESS = '1 Finsbury Avenue, London EC2M 2PF';
 const UPDATED = '16 April 2026';
 

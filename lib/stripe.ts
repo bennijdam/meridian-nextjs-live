@@ -51,7 +51,7 @@ export async function createCheckoutSession(args: {
   successUrl?: string;
   cancelUrl?: string;
 }) {
-  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
   const success = args.successUrl || `${SITE}/checkout/success?session_id={CHECKOUT_SESSION_ID}`;
   const cancel  = args.cancelUrl  || `${SITE}/pricing?cancelled=1`;
 
@@ -122,7 +122,7 @@ export async function createCheckoutSession(args: {
 export async function createPortalSession(
   argsOrCustomerId: string | { customerId: string; returnUrl?: string }
 ) {
-  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
   const args = typeof argsOrCustomerId === 'string'
     ? { customerId: argsOrCustomerId }
     : argsOrCustomerId;

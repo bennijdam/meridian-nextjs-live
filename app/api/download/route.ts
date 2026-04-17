@@ -33,7 +33,7 @@ const schema = z.object({
   website: z.string().max(0).optional().or(z.literal('')),
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
 
 export async function POST(req: Request) {
   try {

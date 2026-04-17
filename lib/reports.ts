@@ -107,7 +107,7 @@ export const REPORTS: Report[] = [
     methodology: 'This report combines data from three sources: (1) Meridian\'s own client portfolio of 200+ London businesses across all major service verticals, providing first-party conversion, retention, and ROI data; (2) publicly available market data from Google Keyword Planner, Ahrefs, SEMrush, Google Trends, IAB UK, Statcounter, and ONS; (3) third-party agency benchmarking data from Clutch, Sortlist, DesignRush, and The Manifest. All CPC and search volume figures are modelled estimates — for investment decisions, validate against Google Keyword Planner with an active Ads account.',
     faqs: [
       { q: 'How often is this report updated?', a: 'Annually, in Q1 each year. Major data points are validated quarterly.' },
-      { q: 'Can I cite this report?', a: 'Yes. Please cite as: "The State of London Digital Marketing 2026, Meridian Digital Ltd, meridian.london/reports/london-digital-marketing-2026".' },
+      { q: 'Can I cite this report?', a: 'Yes. Please cite as: "The State of London Digital Marketing 2026, Meridian Digital Ltd, www.meridianweb.co.uk/reports/london-digital-marketing-2026".' },
       { q: 'Is this report free?', a: 'Yes, fully free to read. No email gate. We believe in open data — it gets cited more.' },
     ],
   },

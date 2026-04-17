@@ -12,7 +12,7 @@
 import { SERVICES, type Service } from './services';
 import { type Borough } from './boroughs';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || 'Meridian';
 
 export function organizationSchema() {
@@ -31,7 +31,7 @@ export function organizationSchema() {
     },
     "description": "London digital performance studio. SEO, PPC, web design, app development, social media management. 200+ London brands trust us with their digital programmes.",
     "telephone": "+44-20-XXXX-XXXX",
-    "email": "hello@meridian.london",
+    "email": "hello@meridianweb.co.uk",
     "foundingDate": "2014-03-01",
     "address": {
       "@type": "PostalAddress",

@@ -16,6 +16,8 @@ import { CITIES, getCity, getCityArea, getAllCityAreas, type CityArea, type City
 import { SERVICES, getService, ALL_SERVICE_SLUGS, type Service } from '@/lib/services';
 import { faqSchema, breadcrumbSchema, jsonLd } from '@/lib/schema';
 
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
+
 export function generateStaticParams() {
   const params: { city: string; area: string; service: string }[] = [];
   for (const cityArea of getAllCityAreas()) {
@@ -84,11 +86,11 @@ export default async function CityAreaServicePage(
   const cityServiceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": `https://meridian.london/${c.slug}/${a.slug}/${s.slug}/#service`,
+    "@id": `${SITE}/${c.slug}/${a.slug}/${s.slug}/#service`,
     "name": `${s.shortName} in ${a.name}, ${c.name}`,
     "description": `${s.shortName} for ${a.name}, ${c.name} businesses. ${s.intro}`,
-    "url": `https://meridian.london/${c.slug}/${a.slug}/${s.slug}`,
-    "provider": { "@id": "https://meridian.london/#organization" },
+    "url": `${SITE}/${c.slug}/${a.slug}/${s.slug}`,
+    "provider": { "@id": `${SITE}/#organization` },
     "areaServed": {
       "@type": "Place",
       "name": `${a.name}, ${c.name}`,

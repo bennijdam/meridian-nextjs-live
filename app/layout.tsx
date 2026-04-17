@@ -25,7 +25,7 @@ const mono = Geist_Mono({
   display: 'swap',
 });
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),

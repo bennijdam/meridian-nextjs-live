@@ -11,7 +11,7 @@ import { CASE_STUDIES, getCaseStudy, ALL_CASE_STUDY_SLUGS } from '@/lib/case-stu
 import { SERVICES } from '@/lib/services';
 import { jsonLd, breadcrumbSchema } from '@/lib/schema';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
 
 export function generateStaticParams() {
   return ALL_CASE_STUDY_SLUGS.map((slug) => ({ slug }));

@@ -22,8 +22,8 @@ import { Resend } from 'resend';
 const TOKEN_TTL_MIN = 15;                       // magic link valid 15 min
 const SESSION_TTL_DAYS = 30;                    // session cookie valid 30 days
 const COOKIE_NAME = 'meridian-session';
-const RESEND_FROM = process.env.RESEND_FROM_EMAIL || 'audits@meridian.london';
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+const RESEND_FROM = process.env.RESEND_FROM_EMAIL || 'audits@meridianweb.co.uk';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
 
 /** Generate a cryptographically secure random token. */
 function generateToken(): string {

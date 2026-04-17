@@ -15,6 +15,8 @@ import { breadcrumbSchema, faqSchema, jsonLd } from '@/lib/schema';
 import LeadCaptureForm from '@/components/LeadCaptureForm';
 import InternalLinks from '@/components/InternalLinks';
 
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
+
 export function generateStaticParams() {
   return getAllCityAreas().map(({ citySlug, areaSlug }) => ({
     city: citySlug,
@@ -91,11 +93,11 @@ export default async function CityAreaPage(
   const localBusiness = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "@id": `https://meridian.london/${c.slug}/${a.slug}/#service`,
+    "@id": `${SITE}/${c.slug}/${a.slug}/#service`,
     "name": `Meridian \u2014 ${a.name}, ${c.name}`,
     "description": a.intro,
-    "url": `https://meridian.london/${c.slug}/${a.slug}`,
-    "parentOrganization": { "@id": "https://meridian.london/#organization" },
+    "url": `${SITE}/${c.slug}/${a.slug}`,
+    "parentOrganization": { "@id": `${SITE}/#organization` },
     "areaServed": {
       "@type": "Place",
       "name": `${a.name}, ${c.name}`,

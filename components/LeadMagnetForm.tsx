@@ -89,7 +89,7 @@ export default function LeadMagnetForm({ magnetSlug, downloadFilename, magnetTit
           Download now →
         </a>
         <p style={{ fontSize: '11px', color: 'var(--ink-3)', marginTop: '14px' }}>
-          Didn&apos;t receive it? Check spam, or <a href="mailto:hello@meridian.london">email us</a>.
+          Didn&apos;t receive it? Check spam, or <a href="mailto:hello@meridianweb.co.uk">email us</a>.
         </p>
       </div>
     );

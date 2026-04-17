@@ -102,7 +102,7 @@ async function parseUrl(url: string): Promise<{
     const fullUrl = url.startsWith('http') ? url : `https://${url}`;
     const res = await fetch(fullUrl, {
       signal: AbortSignal.timeout(15000),
-      headers: { 'User-Agent': 'MeridianAuditBot/1.0 (+https://meridian.london)' },
+      headers: { 'User-Agent': 'MeridianAuditBot/1.0 (+https://www.meridianweb.co.uk)' },
     });
     if (!res.ok) return null;
     const html = await res.text();
@@ -287,7 +287,7 @@ export function auditResultToEmail(result: AuditResult): string {
 
       <div style="background: #f8f8fc; padding: 24px 32px; border-radius: 0 0 16px 16px; text-align: center; border: 1px solid #e5e5e5; border-top: 0;">
         <p style="font-size: 14px; color: #4a4a5a; margin: 0 0 16px;">Want us to fix these issues? Meridian prices all services 40% below market.</p>
-        <a href="https://meridian.london/pricing" style="display: inline-block; padding: 12px 24px; background: #0a0a14; color: #fff; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px;">View Pricing →</a>
+        <a href="https://www.meridianweb.co.uk/pricing" style="display: inline-block; padding: 12px 24px; background: #0a0a14; color: #fff; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px;">View Pricing →</a>
       </div>
     </div>
   `;

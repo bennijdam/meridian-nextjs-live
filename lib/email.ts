@@ -13,8 +13,8 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-const FROM = process.env.RESEND_FROM_EMAIL || 'audits@meridian.london';
-const REPLY_TO = process.env.RESEND_REPLY_TO || 'hello@meridian.london';
+const FROM = process.env.RESEND_FROM_EMAIL || 'audits@meridianweb.co.uk';
+const REPLY_TO = process.env.RESEND_REPLY_TO || 'hello@meridianweb.co.uk';
 
 export async function sendAuditConfirmation(args: {
   to: string;
@@ -87,9 +87,9 @@ function htmlAuditConfirmation({ url, industry }: { url: string; industry?: stri
     <li>Keyword gaps versus your top 5 London competitors</li>
     <li>Backlink profile and authority signals</li>
   </ul>
-  <a href="https://meridian.london/services/seo-london" style="display:inline-block;padding:14px 24px;background:#0f172a;color:#fff;border-radius:999px;text-decoration:none;font-weight:500;font-size:14px">See our SEO services</a>
+  <a href="https://www.meridianweb.co.uk/services/seo-london" style="display:inline-block;padding:14px 24px;background:#0f172a;color:#fff;border-radius:999px;text-decoration:none;font-weight:500;font-size:14px">See our SEO services</a>
   <hr style="border:none;border-top:1px solid #e5e7eb;margin:32px 0 20px">
-  <p style="font-size:12px;color:#6b6b78;line-height:1.6;margin:0">Meridian Digital Ltd · 1 Finsbury Avenue, London EC2M 2PF · Company No. 09876543<br>You received this email because you requested a free SEO audit at meridian.london. <a href="mailto:${REPLY_TO}?subject=unsubscribe" style="color:#6b6b78">Unsubscribe</a></p>
+  <p style="font-size:12px;color:#6b6b78;line-height:1.6;margin:0">Meridian Digital Ltd · 1 Finsbury Avenue, London EC2M 2PF · Company No. 09876543<br>You received this email because you requested a free SEO audit at meridianweb.co.uk. <a href="mailto:${REPLY_TO}?subject=unsubscribe" style="color:#6b6b78">Unsubscribe</a></p>
 </div>
 </body></html>`;
 }
@@ -110,7 +110,7 @@ In the meantime, here's what we'll be checking:
 - Keyword gaps versus your top 5 London competitors
 - Backlink profile and authority signals
 
-See our SEO services: https://meridian.london/services/seo-london
+See our SEO services: https://www.meridianweb.co.uk/services/seo-london
 
 —
 Meridian Digital Ltd · 1 Finsbury Avenue, London EC2M 2PF · Company No. 09876543
@@ -136,7 +136,7 @@ export async function sendAuditResults(args: {
     replyTo: REPLY_TO,
     subject: `Your SEO Audit Results — ${args.url}`,
     html: args.auditHtml,
-    text: `Your SEO audit for ${args.url} is ready. View the full results at https://meridian.london/audit`,
+    text: `Your SEO audit for ${args.url} is ready. View the full results at https://www.meridianweb.co.uk/audit`,
   });
 }
 
@@ -193,9 +193,9 @@ function htmlLeadMagnetDelivery({ magnetTitle, downloadUrl }: { magnetTitle: str
     <li>Got a question about applying it? Hit reply. A real person reads these.</li>
     <li>Want personalised advice? We offer a free 90-second SEO audit.</li>
   </ul>
-  <a href="https://meridian.london/audit" style="display:inline-block;padding:14px 24px;background:#fff;border:1px solid #e5e7eb;color:#0f172a;border-radius:999px;text-decoration:none;font-weight:500;font-size:14px">Get a free audit</a>
+  <a href="https://www.meridianweb.co.uk/audit" style="display:inline-block;padding:14px 24px;background:#fff;border:1px solid #e5e7eb;color:#0f172a;border-radius:999px;text-decoration:none;font-weight:500;font-size:14px">Get a free audit</a>
   <hr style="border:none;border-top:1px solid #e5e7eb;margin:32px 0 20px">
-  <p style="font-size:12px;color:#6b6b78;line-height:1.6;margin:0">Meridian Digital Ltd · 1 Finsbury Avenue, London EC2M 2PF · Company No. 09876543<br>You received this email because you requested a free resource at meridian.london. <a href="mailto:${REPLY_TO}?subject=unsubscribe" style="color:#6b6b78">Unsubscribe</a></p>
+  <p style="font-size:12px;color:#6b6b78;line-height:1.6;margin:0">Meridian Digital Ltd · 1 Finsbury Avenue, London EC2M 2PF · Company No. 09876543<br>You received this email because you requested a free resource at meridianweb.co.uk. <a href="mailto:${REPLY_TO}?subject=unsubscribe" style="color:#6b6b78">Unsubscribe</a></p>
 </div>
 </body></html>`;
 }
@@ -212,7 +212,7 @@ ${downloadUrl}
 A couple of things worth knowing:
 - The file is free to share with your team — just keep it internal.
 - Got a question about applying it? Hit reply. A real person reads these.
-- Want personalised advice? We offer a free 90-second SEO audit: https://meridian.london/audit
+- Want personalised advice? We offer a free 90-second SEO audit: https://www.meridianweb.co.uk/audit
 
 —
 Meridian Digital Ltd · 1 Finsbury Avenue, London EC2M 2PF · Company No. 09876543

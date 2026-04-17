@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { jsonLd, breadcrumbSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-  title: 'Contact Meridian London — hello@meridian.london',
+  title: 'Contact Meridian London — hello@meridianweb.co.uk',
   description: 'Get in touch with Meridian. Email, phone, or send a brief. First reply within four working hours, always from a senior practitioner.',
   alternates: { canonical: '/contact' },
 };
@@ -42,7 +42,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <span className="cm-label">EMAIL</span>
-                <a href="mailto:hello@meridian.london" className="cm-value">hello@meridian.london</a>
+                <a href="mailto:hello@meridianweb.co.uk" className="cm-value">hello@meridianweb.co.uk</a>
                 <p className="cm-meta">First reply &lt; 4 working hours</p>
               </div>
             </div>

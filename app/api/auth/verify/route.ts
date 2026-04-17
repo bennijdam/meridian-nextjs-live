@@ -9,7 +9,7 @@ import { consumeMagicLink, setSessionCookie, getRequestContext } from '@/lib/aut
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
 
 export async function GET(req: Request) {
   try {

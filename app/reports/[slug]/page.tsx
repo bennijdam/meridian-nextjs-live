@@ -28,7 +28,7 @@ export async function generateMetadata(
 }
 
 function reportSchema(r: { title: string; summary: string; slug: string; date: string }) {
-  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
   return {
     "@context": "https://schema.org",
     "@type": "Report",

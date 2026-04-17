@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 const COMPANY = 'Meridian Digital Ltd';
-const PRIVACY_EMAIL = 'privacy@meridian.london';
+const PRIVACY_EMAIL = 'privacy@meridianweb.co.uk';
 const ADDRESS = '1 Finsbury Avenue, London EC2M 2PF';
 const UPDATED = '16 April 2026';
 
@@ -72,7 +72,7 @@ export default function CookiesPage() {
             <h2>1. About this policy</h2>
             <p>
               This Cookie Policy explains how <strong>{COMPANY}</strong> (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;Meridian&rdquo;)
-              uses cookies and similar technologies on our website at <a href="https://meridian.london">meridian.london</a>.
+              uses cookies and similar technologies on our website at <a href="https://www.meridianweb.co.uk">www.meridianweb.co.uk</a>.
               It should be read alongside our <Link href="/privacy">Privacy Policy</Link>.
             </p>
             <p>

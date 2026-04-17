@@ -15,7 +15,7 @@ import { ALL_NEIGHBORHOOD_SLUGS } from '@/lib/neighborhoods';
 import { ALL_AUDIENCE_SLUGS } from '@/lib/audiences';
 import { ALL_LEAD_MAGNET_SLUGS } from '@/lib/lead-magnets';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
 const lastModified = new Date();
 
 export default function sitemap(): MetadataRoute.Sitemap {

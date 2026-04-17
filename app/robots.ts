@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
 
 export default function robots(): MetadataRoute.Robots {
   return {

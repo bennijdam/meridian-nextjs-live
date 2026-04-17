@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/careers' },
 };
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meridian.london';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.meridianweb.co.uk';
 
 type JobPosting = {
   title: string;
