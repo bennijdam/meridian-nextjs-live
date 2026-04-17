@@ -1,0 +1,9 @@
+[Placeholder — to be replaced with the real XLSX]
+
+MERIDIAN APP DEVELOPMENT COST CALCULATOR (Spreadsheet)
+
+A ready-to-use spreadsheet model built from 60+ real London app engagements. The workbook is organised into eight tabs: a project inputs tab (features, platform, team size, compliance profile), a feature-level cost breakdown, a native vs cross-platform comparison with real day-rate assumptions for UK engineering talent, a compliance add-on module covering FCA, PCI-DSS, NHS DSP and GDPR, a timeline and milestone estimator, a 12-month post-launch maintenance model, an App Store + Play Store submission checklist, and three worked example builds (MVP, production, enterprise).
+
+Fill in your requirements on tab 1 and the model outputs a realistic budget range — with sensitivity bands for optimistic, expected and pessimistic engineering velocity. Every input cell is clearly labelled; every output cell is protected to stop accidental overwrites. Formulas are unlocked so you can inspect the logic and adapt it to your own day-rate assumptions.
+
+Designed specifically for non-technical founders, product managers and CTOs scoping new mobile apps in the London market — where engineering day rates, compliance overhead and post-launch maintenance expectations differ materially from US and APAC benchmarks.

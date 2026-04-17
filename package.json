@@ -1,0 +1,52 @@
+{
+  "name": "meridian-london",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Meridian — London's digital performance studio. Production Next.js 15 site engineered for SEO/GEO/AEO dominance.",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "env:check": "node scripts/check-env.mjs",
+    "stripe:setup": "node scripts/setup-stripe.mjs",
+    "deploy:preflight": "npm run env:check && npm run typecheck && npm run lint && npm run build",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "0.10.4",
+    "@upstash/ratelimit": "2.0.5",
+    "@upstash/redis": "1.34.3",
+    "clsx": "2.1.1",
+    "drizzle-orm": "0.38.3",
+    "motion": "11.18.0",
+    "next": "15.1.6",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "resend": "4.1.1",
+    "stripe": "17.5.0",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "22.10.5",
+    "@types/react": "19.0.4",
+    "@types/react-dom": "19.0.2",
+    "autoprefixer": "10.4.20",
+    "drizzle-kit": "0.30.2",
+    "eslint": "9.18.0",
+    "eslint-config-next": "15.1.6",
+    "postcss": "8.5.1",
+    "prettier": "3.4.2",
+    "sharp": "0.33.5",
+    "tailwindcss": "^4.2.2",
+    "typescript": "5.7.3"
+  },
+  "engines": {
+    "node": ">=20.18.0"
+  }
+}
