@@ -9,7 +9,9 @@
 
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 const FROM = process.env.RESEND_FROM_EMAIL || 'audits@meridian.london';
 const REPLY_TO = process.env.RESEND_REPLY_TO || 'hello@meridian.london';
@@ -20,6 +22,11 @@ export async function sendAuditConfirmation(args: {
   industry?: string;
 }) {
   const { to, url, industry } = args;
+
+  if (!resend) {
+    console.info('[email] RESEND_API_KEY not set — audit confirmation skipped', { to, url });
+    return;
+  }
 
   return resend.emails.send({
     from: `Meridian Audits <${FROM}>`,
@@ -118,7 +125,7 @@ export async function sendAuditResults(args: {
   url: string;
   auditHtml: string;
 }) {
-  if (!process.env.RESEND_API_KEY) {
+  if (!resend) {
     console.info('[email] RESEND_API_KEY not set — audit results not sent', { to: args.to, url: args.url });
     return;
   }
@@ -144,7 +151,7 @@ export async function sendLeadMagnetDelivery(args: {
 }) {
   const { to, magnetTitle, downloadUrl } = args;
 
-  if (!process.env.RESEND_API_KEY) {
+  if (!resend) {
     console.info('[email] RESEND_API_KEY not set — lead-magnet delivery skipped', { to, magnetTitle });
     return;
   }
