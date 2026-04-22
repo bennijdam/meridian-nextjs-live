@@ -83,6 +83,34 @@ This is the single most important rule in this project. Every new page, componen
 
 ---
 
+## 3a. Security rules
+
+- **Sanitize all user input.** Never use `innerHTML` without sanitization.
+- **No new npm packages** without explicit approval. Use existing utilities or native APIs.
+- **No hardcoded credentials.** Secrets in `.env.local` only. Template in `.env.example`.
+- **Every new function must have try/catch** with non-sensitive error logging.
+- **Stripe webhook:** never replace `req.text()` with `req.json()` — breaks signature verification.
+- **Stripe events are retried.** Use `event.id` to dedupe non-idempotent operations.
+
+---
+
+## 3b. Multi-agent coordination — Handover Ritual
+
+After every completed task, update both files:
+
+### A. `HANDOVER.md`
+- **Summary:** what changed
+- **Technical Debt / Risks:** quick fixes needing a permanent solution
+- **Verification:** how the next agent confirms the work (e.g. `npm run build`, check URL)
+
+### B. `AGENTS.md` (append only)
+```
+[YYYY-MM-DD | HH:MM] | Agent: [Name] | Commit: [short hash or "uncommitted"] | Status: [Success/Partial/Blocker]
+Note for next agent: [1–2 sentences not obvious from the code]
+```
+
+---
+
 ## 4. What NOT to do
 
 - Do not add new npm dependencies without justification

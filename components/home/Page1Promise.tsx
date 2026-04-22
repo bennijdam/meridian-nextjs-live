@@ -4,6 +4,8 @@
 export default function Page1Promise() {
   return (
     <section className="page1-section" id="page1">
+      <div className="section-box-wrap">
+      <div className="section-box">
       <div className="wrap">
         <div className="page1-grid">
           <div className="page1-text reveal">
@@ -54,6 +56,8 @@ export default function Page1Promise() {
             </div>
           </div>
         </div>
+      </div>
+      </div>
       </div>
     </section>
   );

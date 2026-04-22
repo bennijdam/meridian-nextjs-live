@@ -4,6 +4,8 @@
 export default function WhyLondon() {
   return (
     <section className="why-section">
+      <div className="section-box-wrap">
+      <div className="section-box">
       <div className="wrap">
         <div className="section-head reveal">
           <span className="section-eyebrow">PERFORMANCE</span>
@@ -28,6 +30,8 @@ export default function WhyLondon() {
             <div className="why-label">Average LCP across all sites we ship — top 4% of UK websites</div>
           </div>
         </div>
+      </div>
+      </div>
       </div>
     </section>
   );

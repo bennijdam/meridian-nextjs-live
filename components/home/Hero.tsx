@@ -1,14 +1,20 @@
 /**
- * Homepage hero section. Exact visual parity with the original inline hero.
- * Includes the marquee brand bar.
+ * Homepage hero — with animated background orbs for 2040 aesthetic.
  */
 export default function Hero() {
   return (
     <section className="hero">
+      {/* Animated background orbs */}
+      <div className="hero-orb hero-orb-1" aria-hidden="true" />
+      <div className="hero-orb hero-orb-2" aria-hidden="true" />
+      <div className="hero-orb hero-orb-3" aria-hidden="true" />
+      {/* Dot-grid overlay */}
+      <div className="hero-dot-grid" aria-hidden="true" />
+
       <div className="wrap">
         <div className="hero-grid">
           <div className="hero-text">
-            <span className="eyebrow">London&apos;s #1 rated digital studio<span className="visually-hidden"> with </span></span>
+            <span className="eyebrow" data-scramble="true">London&apos;s #1 rated digital studio<span className="visually-hidden"> with </span></span>
             <h1 className="hero-title">
               London&apos;s <span className="accent">performance</span> engine for serious brands.
             </h1>
@@ -16,11 +22,11 @@ export default function Hero() {
               A boutique London digital marketing agency engineering compounding growth through SEO, PPC, web design, app development and social media management — with measured ROI from month one.
             </p>
             <div className="cta-row">
-              <a href="#audit" className="btn btn-primary">
+              <a href="#audit" className="btn btn-primary magnetic">
                 Get Free SEO Audit
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </a>
-              <a href="#services" className="btn btn-ghost">
+              <a href="#services" className="btn btn-ghost magnetic">
                 Explore Services
               </a>
             </div>
@@ -60,13 +66,15 @@ export default function Hero() {
               </div>
             </div>
           </div>
+
           <div className="hero-visual">
             <div className="hero-img-wrap">
               <picture>
-                <source type="image/avif" srcSet="/img/digital-marketing-team-480w.avif 480w, /img/digital-marketing-team-768w.avif 768w, /img/digital-marketing-team-1200w.avif 1200w, /img/digital-marketing-team-1920w.avif 1920w" sizes="(min-width: 1024px) 560px, 100vw" />
-                <source type="image/webp" srcSet="/img/digital-marketing-team-480w.webp 480w, /img/digital-marketing-team-768w.webp 768w, /img/digital-marketing-team-1200w.webp 1200w, /img/digital-marketing-team-1920w.webp 1920w" sizes="(min-width: 1024px) 560px, 100vw" />
-                <img src="/img/digital-marketing-team-1200w.webp" alt="London digital marketing agency team strategy session" width="560" height="700" loading="eager" fetchPriority="high" />
+                <source type="image/webp" srcSet="/img/london-office-team-480w.webp 480w, /img/london-office-team-768w.webp 768w, /img/london-office-team-1200w.webp 1200w, /img/london-office-team-1920w.webp 1920w" sizes="(min-width: 1024px) 560px, 100vw" />
+                <img src="/img/london-office-team-1200w.webp" alt="London digital marketing agency team at work" width="560" height="700" loading="eager" fetchPriority="high" />
               </picture>
+              {/* Scan-line sweep */}
+              <div className="hero-scanline" aria-hidden="true" />
             </div>
             <div className="floating-card fc-1" aria-hidden="true">
               <div className="fc-icon">📈</div>
@@ -103,7 +111,6 @@ export default function Hero() {
             <span className="marquee-item">·</span>
             <span className="marquee-item">Hackney lifestyle</span>
             <span className="marquee-item">·</span>
-            {/* Duplicate for seamless loop */}
             <span className="marquee-item">Shoreditch fintech</span>
             <span className="marquee-item">·</span>
             <span className="marquee-item">Mayfair private equity</span>

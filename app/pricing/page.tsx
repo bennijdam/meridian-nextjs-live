@@ -1,11 +1,3 @@
-/**
- * /pricing — full pricing page.
- *
- * Three billing options × tier cards per service, with live "vs market"
- * deltas and Stripe-checkout buttons. Server-rendered for SEO; the
- * billing toggle and service tabs are client-side.
- */
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
@@ -13,6 +5,10 @@ import {
   formatGBP, calcSavingsVsMarket,
 } from '@/lib/pricing';
 import { jsonLd, breadcrumbSchema, faqSchema } from '@/lib/schema';
+import HomepageInteractions from '@/components/HomepageInteractions';
+import SiteHeader from '@/components/home/SiteHeader';
+import SiteFooter from '@/components/home/SiteFooter';
+import MobileCTA from '@/components/home/MobileCTA';
 
 export const metadata: Metadata = {
   title: 'Pricing — 40% Below London Market | Meridian',
@@ -39,11 +35,15 @@ export default function PricingPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbs) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(faqSchema(PRICING_FAQS)) }} />
+      <HomepageInteractions />
+      <SiteHeader />
 
-      <main className="wrap" style={{ paddingTop: '140px', paddingBottom: '60px' }}>
-        {/* ============ HERO ============ */}
-        <header style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto 60px' }} className="reveal">
-          <span className="section-eyebrow">PRICING</span>
+      <section className="inner-hero">
+        <div className="hero-orb hero-orb-1" aria-hidden="true" />
+        <div className="hero-orb hero-orb-2" aria-hidden="true" />
+        <div className="hero-dot-grid" aria-hidden="true" />
+        <div className="wrap">
+          <span className="section-eyebrow" data-scramble="true">PRICING</span>
           <h1 className="section-title" style={{ fontSize: 'clamp(44px, 6vw, 80px)', marginBottom: '20px' }}>
             <span className="accent">{RETAINER_SAVINGS_VS_MARKET_PCT}% below</span> London market.<br/>
             Same senior team. No catch.
@@ -52,8 +52,6 @@ export default function PricingPage() {
             Three pricing tiers per service. Three billing options to fit your cash flow.
             Cancel any time. No setup fees, no minimum spend, no agency padding.
           </p>
-
-          {/* 4.9-star feature */}
           <div className="rating-row" style={{ justifyContent: 'center', marginTop: '24px' }}>
             <span className="rating-stars" aria-hidden="true">
               {[0,1,2,3,4].map(i => (
@@ -62,151 +60,132 @@ export default function PricingPage() {
             </span>
             <span className="rating-text"><strong>4.9</strong> from 127 reviews</span>
           </div>
-        </header>
+        </div>
+      </section>
 
-        {/* ============ BILLING TOGGLE ============ */}
-        <BillingToggle />
+      <div className="section-box-wrap inner-section-box-wrap">
+        <div className="section-box">
+          <div className="wrap">
+            <BillingToggle />
 
-        {/* ============ RETAINER SERVICES ============ */}
-        <section style={{ marginBottom: '100px' }} id="retainers">
-          <div className="section-head reveal" style={{ textAlign: 'left', marginBottom: '32px' }}>
-            <span className="section-eyebrow">MONTHLY RETAINERS</span>
-            <h2 className="section-title" style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}>
-              Ongoing services
-            </h2>
-            <p className="section-sub" style={{ textAlign: 'left' }}>
-              Subscription pricing for SEO, PPC, social and content. Cancel any time on PAYG. Monthly subscription saves 10%; annual saves {ANNUAL_DISCOUNT_PCT}%.
-            </p>
-          </div>
+            <section style={{ marginBottom: '80px' }} id="retainers">
+              <div className="section-head reveal" style={{ textAlign: 'left', marginBottom: '32px' }}>
+                <span className="section-eyebrow">MONTHLY RETAINERS</span>
+                <h2 className="section-title" style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}>Ongoing services</h2>
+                <p className="section-sub" style={{ textAlign: 'left' }}>
+                  Subscription pricing for SEO, PPC, social and content. Cancel any time on PAYG. Monthly subscription saves 10%; annual saves {ANNUAL_DISCOUNT_PCT}%.
+                </p>
+              </div>
+              <ServiceTabs services={uniqueRetainerServices()} />
+              {uniqueRetainerServices().map((svc, i) => (
+                <div key={svc.slug} className={`pricing-panel ${i === 0 ? 'active' : ''}`} data-pricing-panel={svc.slug}>
+                  <div className="tier-grid">
+                    {RETAINERS.filter(r => r.serviceName === svc.name).map(tier => (
+                      <TierCard key={tier.id} tier={tier} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </section>
 
-          {/* Service tabs */}
-          <ServiceTabs services={uniqueRetainerServices()} />
+            <section style={{ marginBottom: '80px' }} id="projects">
+              <div className="section-head reveal" style={{ textAlign: 'left', marginBottom: '32px' }}>
+                <span className="section-eyebrow">FIXED-PRICE PROJECTS</span>
+                <h2 className="section-title" style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}>One-off projects</h2>
+                <p className="section-sub" style={{ textAlign: 'left' }}>
+                  Fixed scope, fixed price, fixed timeline. Pay 50% on kick-off, 50% on launch. No surprises.
+                </p>
+              </div>
+              <ProjectServiceTabs services={uniqueProjectServices()} />
+              {uniqueProjectServices().map((svc, i) => (
+                <div key={svc.slug} className={`project-panel ${i === 0 ? 'active' : ''}`} data-project-panel={svc.slug}>
+                  <div className="tier-grid">
+                    {PROJECTS.filter(p => p.serviceName === svc.name).map(p => (
+                      <ProjectCard key={p.id} project={p} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </section>
 
-          {/* Tier panels — one panel per service */}
-          {uniqueRetainerServices().map((svc, i) => (
-            <div key={svc.slug} className={`pricing-panel ${i === 0 ? 'active' : ''}`} data-pricing-panel={svc.slug}>
-              <div className="tier-grid">
-                {RETAINERS.filter(r => r.serviceName === svc.name).map(tier => (
-                  <TierCard key={tier.id} tier={tier} />
+            <section style={{ marginBottom: '80px' }} className="reveal">
+              <div className="section-head" style={{ textAlign: 'center', marginBottom: '32px' }}>
+                <span className="section-eyebrow">VS MARKET</span>
+                <h2 className="section-title" style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}>How we compare on price</h2>
+                <p className="section-sub">
+                  Same scope. Same seniority. Roughly half the bill. Reference market averages from Sortlist UK 2026, Clutch UK and our own n=180 industry survey.
+                </p>
+              </div>
+              <div className="comparison-table-wrap glass">
+                <table className="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Service</th><th>Tier</th><th>Meridian</th><th>London market avg</th><th>You save</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {RETAINERS.map(r => (
+                      <tr key={r.id}>
+                        <td><strong>{r.serviceName}</strong></td>
+                        <td>{r.tierName}</td>
+                        <td className="num"><strong>{formatGBP(r.paygMonthly)}/mo</strong></td>
+                        <td className="num strikethrough">{formatGBP(r.marketAvgMonthly)}/mo</td>
+                        <td className="num savings-pill">{calcSavingsVsMarket(r.paygMonthly, r.marketAvgMonthly)}% off</td>
+                      </tr>
+                    ))}
+                    {PROJECTS.map(p => (
+                      <tr key={p.id}>
+                        <td><strong>{p.serviceName}</strong></td>
+                        <td>{p.tierName}</td>
+                        <td className="num"><strong>{formatGBP(p.price)}</strong></td>
+                        <td className="num strikethrough">{formatGBP(p.marketAvg)}</td>
+                        <td className="num savings-pill">{calcSavingsVsMarket(p.price, p.marketAvg)}% off</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section className="faq-section" style={{ padding: '40px 0' }} id="faq">
+              <div className="section-head reveal" style={{ marginBottom: '40px' }}>
+                <span className="section-eyebrow">FAQ</span>
+                <h2 className="section-title" style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}>Pricing questions</h2>
+              </div>
+              <div className="faq-list reveal">
+                {PRICING_FAQS.map((f, i) => (
+                  <details key={i} className="faq-item">
+                    <summary className="faq-q">{f.q}</summary>
+                    <div className="faq-a">{f.a}</div>
+                  </details>
                 ))}
               </div>
-            </div>
-          ))}
-        </section>
-
-        {/* ============ PROJECT SERVICES ============ */}
-        <section style={{ marginBottom: '100px' }} id="projects">
-          <div className="section-head reveal" style={{ textAlign: 'left', marginBottom: '32px' }}>
-            <span className="section-eyebrow">FIXED-PRICE PROJECTS</span>
-            <h2 className="section-title" style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}>
-              One-off projects
-            </h2>
-            <p className="section-sub" style={{ textAlign: 'left' }}>
-              Fixed scope, fixed price, fixed timeline. Pay 50% on kick-off, 50% on launch. No surprises.
-            </p>
+            </section>
           </div>
+        </div>
+      </div>
 
-          {/* Project service tabs */}
-          <ProjectServiceTabs services={uniqueProjectServices()} />
-
-          {uniqueProjectServices().map((svc, i) => (
-            <div key={svc.slug} className={`project-panel ${i === 0 ? 'active' : ''}`} data-project-panel={svc.slug}>
-              <div className="tier-grid">
-                {PROJECTS.filter(p => p.serviceName === svc.name).map(p => (
-                  <ProjectCard key={p.id} project={p} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </section>
-
-        {/* ============ COMPARISON TABLE ============ */}
-        <section style={{ marginBottom: '100px' }} className="reveal">
-          <div className="section-head" style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <span className="section-eyebrow">VS MARKET</span>
-            <h2 className="section-title" style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}>
-              How we compare on price
-            </h2>
-            <p className="section-sub">
-              Same scope. Same seniority. Roughly half the bill. Reference market averages from Sortlist UK 2026, Clutch UK and our own n=180 industry survey.
-            </p>
-          </div>
-
-          <div className="comparison-table-wrap glass">
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Service</th>
-                  <th>Tier</th>
-                  <th>Meridian</th>
-                  <th>London market avg</th>
-                  <th>You save</th>
-                </tr>
-              </thead>
-              <tbody>
-                {RETAINERS.map(r => (
-                  <tr key={r.id}>
-                    <td><strong>{r.serviceName}</strong></td>
-                    <td>{r.tierName}</td>
-                    <td className="num"><strong>{formatGBP(r.paygMonthly)}/mo</strong></td>
-                    <td className="num strikethrough">{formatGBP(r.marketAvgMonthly)}/mo</td>
-                    <td className="num savings-pill">{calcSavingsVsMarket(r.paygMonthly, r.marketAvgMonthly)}% off</td>
-                  </tr>
-                ))}
-                {PROJECTS.map(p => (
-                  <tr key={p.id}>
-                    <td><strong>{p.serviceName}</strong></td>
-                    <td>{p.tierName}</td>
-                    <td className="num"><strong>{formatGBP(p.price)}</strong></td>
-                    <td className="num strikethrough">{formatGBP(p.marketAvg)}</td>
-                    <td className="num savings-pill">{calcSavingsVsMarket(p.price, p.marketAvg)}% off</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* ============ FAQ ============ */}
-        <section className="faq-section" style={{ padding: '40px 0 80px' }} id="faq">
-          <div className="section-head reveal" style={{ marginBottom: '40px' }}>
-            <span className="section-eyebrow">FAQ</span>
-            <h2 className="section-title" style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}>
-              Pricing questions
-            </h2>
-          </div>
-          <div className="faq-list reveal">
-            {PRICING_FAQS.map((f, i) => (
-              <details key={i} className="faq-item">
-                <summary className="faq-q">{f.q}</summary>
-                <div className="faq-a">{f.a}</div>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        {/* ============ FINAL CTA ============ */}
-        <section className="final-cta" style={{ padding: '60px 0 80px' }}>
+      <section className="final-cta" style={{ padding: '60px 0 80px' }}>
+        <div className="wrap">
           <div className="final-card reveal">
             <h2 className="final-h">Not sure which tier you need?</h2>
             <p className="final-p">Get your free SEO audit in 90 seconds. We&apos;ll recommend the right tier based on your current site, competitors and goals — no upsell.</p>
-            <Link href="/#audit" className="btn btn-primary" style={{ marginTop: '20px' }}>
-              Get Free SEO Audit
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 16, height: 16 }}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </Link>
+            <div className="cta-row" style={{ justifyContent: 'center', marginTop: '20px' }}>
+              <Link href="/#audit" className="btn btn-primary magnetic">
+                Get Free SEO Audit
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 16, height: 16 }}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      {/* Hydration script — handles toggle + service tabs + Stripe checkout */}
       <PricingClientScript />
+      <SiteFooter />
+      <MobileCTA />
     </>
   );
 }
-
-// ============================================================
-// Helpers
-// ============================================================
 
 function uniqueRetainerServices() {
   const seen = new Set<string>();
@@ -226,24 +205,17 @@ function uniqueProjectServices() {
   }).map(p => ({ slug: p.serviceSlug, name: p.serviceName }));
 }
 
-// ============================================================
-// Components
-// ============================================================
-
 function BillingToggle() {
   return (
     <div className="billing-toggle reveal" role="tablist" aria-label="Billing period">
       <button type="button" className="bt-option active" data-period="payg" role="tab">
-        Pay-as-you-go
-        <span className="bt-meta">Cancel anytime</span>
+        Pay-as-you-go<span className="bt-meta">Cancel anytime</span>
       </button>
       <button type="button" className="bt-option" data-period="monthly" role="tab">
-        Monthly
-        <span className="bt-meta">Save 10%</span>
+        Monthly<span className="bt-meta">Save 10%</span>
       </button>
       <button type="button" className="bt-option" data-period="annual" role="tab">
-        Annual
-        <span className="bt-meta savings">Save {ANNUAL_DISCOUNT_PCT}%</span>
+        Annual<span className="bt-meta savings">Save {ANNUAL_DISCOUNT_PCT}%</span>
       </button>
     </div>
   );
@@ -275,17 +247,13 @@ function ProjectServiceTabs({ services }: { services: Array<{ slug: string; name
 
 function TierCard({ tier }: { tier: typeof RETAINERS[number] }) {
   const savingsPct = calcSavingsVsMarket(tier.paygMonthly, tier.marketAvgMonthly);
-
   return (
     <article className={`tier-card ${tier.popular ? 'tier-card-popular' : ''}`} data-tier-id={tier.id}>
       {tier.popular && <span className="tier-badge">MOST POPULAR</span>}
-
       <div className="tier-header">
         <h3 className="tier-name">{tier.tierName}</h3>
         <p className="tier-tagline">{tier.tagline}</p>
       </div>
-
-      {/* Price block — values swap based on billing period */}
       <div className="tier-price">
         <span className="tier-currency">£</span>
         <span className="tier-amount" data-payg={tier.paygMonthly} data-monthly={tier.monthlyMonthly} data-annual={tier.annualMonthly}>
@@ -297,9 +265,7 @@ function TierCard({ tier }: { tier: typeof RETAINERS[number] }) {
         <span className="strikethrough">{formatGBP(tier.marketAvgMonthly)}/mo market avg</span>
         <span className="savings-pill">{savingsPct}% off</span>
       </div>
-
       <p className="tier-description">{tier.description}</p>
-
       <ul className="tier-features">
         {tier.features.map((f, i) => (
           <li key={i}>
@@ -308,13 +274,7 @@ function TierCard({ tier }: { tier: typeof RETAINERS[number] }) {
           </li>
         ))}
       </ul>
-
-      <button
-        type="button"
-        className={`tier-cta btn ${tier.popular ? 'btn-primary' : 'btn-ghost'}`}
-        data-checkout-product-id={tier.id}
-        data-checkout-product-kind="retainer"
-      >
+      <button type="button" className={`tier-cta btn ${tier.popular ? 'btn-primary' : 'btn-ghost'}`} data-checkout-product-id={tier.id} data-checkout-product-kind="retainer">
         Subscribe to {tier.tierName} →
       </button>
     </article>
@@ -323,16 +283,13 @@ function TierCard({ tier }: { tier: typeof RETAINERS[number] }) {
 
 function ProjectCard({ project }: { project: typeof PROJECTS[number] }) {
   const savingsPct = calcSavingsVsMarket(project.price, project.marketAvg);
-
   return (
     <article className={`tier-card ${project.popular ? 'tier-card-popular' : ''}`}>
       {project.popular && <span className="tier-badge">MOST POPULAR</span>}
-
       <div className="tier-header">
         <h3 className="tier-name">{project.tierName}</h3>
         <p className="tier-tagline">{project.serviceName} project</p>
       </div>
-
       <div className="tier-price">
         <span className="tier-currency">£</span>
         <span className="tier-amount">{project.price.toLocaleString('en-GB')}</span>
@@ -342,9 +299,7 @@ function ProjectCard({ project }: { project: typeof PROJECTS[number] }) {
         <span className="strikethrough">{formatGBP(project.marketAvg)} market avg</span>
         <span className="savings-pill">{savingsPct}% off</span>
       </div>
-
       <p className="tier-description">{project.description}</p>
-
       <ul className="tier-features">
         {project.features.map((f, i) => (
           <li key={i}>
@@ -353,34 +308,21 @@ function ProjectCard({ project }: { project: typeof PROJECTS[number] }) {
           </li>
         ))}
       </ul>
-
-      <button
-        type="button"
-        className={`tier-cta btn ${project.popular ? 'btn-primary' : 'btn-ghost'}`}
-        data-checkout-product-id={project.id}
-        data-checkout-product-kind="project"
-      >
+      <button type="button" className={`tier-cta btn ${project.popular ? 'btn-primary' : 'btn-ghost'}`} data-checkout-product-id={project.id} data-checkout-product-kind="project">
         Buy {project.tierName} →
       </button>
     </article>
   );
 }
 
-/**
- * Tiny client script: wires the billing toggle, service tabs, and Stripe checkout.
- * Inlined so the pricing page works without a separate client component file.
- */
 function PricingClientScript() {
   const js = `
 (function(){
   var period = 'payg';
-
-  // Billing toggle
   document.querySelectorAll('.bt-option').forEach(function(b){
     b.addEventListener('click', function(){
       period = b.dataset.period;
       document.querySelectorAll('.bt-option').forEach(function(o){ o.classList.toggle('active', o === b); });
-      // Update all tier amounts
       document.querySelectorAll('.tier-amount').forEach(function(el){
         var v = el.dataset[period];
         if (v) el.textContent = Number(v).toLocaleString('en-GB');
@@ -391,8 +333,6 @@ function PricingClientScript() {
       });
     });
   });
-
-  // Service tab switching
   function bindTabs(tabAttr, panelAttr){
     document.querySelectorAll('[' + tabAttr + ']').forEach(function(t){
       t.addEventListener('click', function(){
@@ -406,8 +346,6 @@ function PricingClientScript() {
   }
   bindTabs('data-pricing-tab', 'data-pricing-panel');
   bindTabs('data-project-tab', 'data-project-panel');
-
-  // Stripe checkout
   document.querySelectorAll('[data-checkout-product-id]').forEach(function(btn){
     btn.addEventListener('click', async function(){
       var productId   = btn.getAttribute('data-checkout-product-id');
@@ -418,10 +356,7 @@ function PricingClientScript() {
       try {
         var res = await fetch('/api/stripe/checkout', {
           method: 'POST', headers: {'Content-Type':'application/json'},
-          body: JSON.stringify({
-            productId: productId, productKind: productKind,
-            period: productKind === 'retainer' ? period : 'oneoff',
-          })
+          body: JSON.stringify({ productId: productId, productKind: productKind, period: productKind === 'retainer' ? period : 'oneoff' })
         });
         var data = await res.json();
         if (data.url) {

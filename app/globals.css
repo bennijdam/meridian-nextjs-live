@@ -1869,3 +1869,384 @@ a.cm-value:hover{color:var(--accent)}
 
 .contact-form{position:sticky;top:90px}
 @media (max-width:1023px){.contact-form{position:relative;top:0}}
+
+/* ============ SECTION BOX CONTAINERS ============ */
+.section-box-wrap{
+  max-width:1360px;
+  margin:0 auto;
+  padding:0 16px;
+}
+@media (min-width:900px){.section-box-wrap{padding:0 28px}}
+
+.section-box{
+  background:var(--bg-2);
+  border:1px solid var(--border-2);
+  border-radius:var(--r-xl);
+  overflow:hidden;
+  padding:80px 0;
+  box-shadow:0 8px 60px rgba(0,0,0,0.35);
+}
+:root[data-theme="light"] .section-box{
+  background:#dde0f5;
+  border-color:rgba(10,10,30,0.12);
+  box-shadow:0 4px 48px rgba(10,10,30,0.08), inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+/* Sections using box treatment — outer padding becomes spacing around the box */
+#services,
+.why-section,
+.reviews-section,
+.page1-section{
+  padding:40px 0;
+}
+/* Strip the reviews section's own bg (moved into .section-box) */
+.reviews-section{background:none}
+:root[data-theme="dark"] .reviews-section,
+:root:not([data-theme]) .reviews-section{background:none}
+
+/* ============ IMAGE ANIMATIONS ============ */
+@keyframes kenBurns{
+  0%,100%{transform:scale(1) translate(0,0)}
+  50%{transform:scale(1.07) translate(-1.5%,-0.8%)}
+}
+@keyframes imgDrift{
+  0%,100%{transform:scale(1.04) translateX(0)}
+  50%{transform:scale(1) translateX(1.5%)}
+}
+
+/* Hero image — slow ken-burns (picture has overflow:hidden from hero-img-wrap) */
+.hero-img-wrap picture{
+  animation:kenBurns 22s ease-in-out infinite;
+  will-change:transform;
+}
+
+/* Bento cards — staggered ambient animation on picture element */
+.bento-card.bc-1 picture{animation:kenBurns 20s ease-in-out infinite}
+.bento-card.bc-2 picture{animation:imgDrift 24s ease-in-out infinite 3s}
+.bento-card.bc-4 picture{animation:kenBurns 22s ease-in-out infinite 6s}
+.bento-card.bc-6 picture{animation:imgDrift 26s ease-in-out infinite 9s}
+/* Pause ken-burns on hover so the img scale transition can take over */
+.bento-card:hover picture{animation-play-state:paused}
+
+/* Page 1 image — gentle ken-burns */
+.page1-img-wrap picture{
+  animation:kenBurns 28s ease-in-out infinite;
+  will-change:transform;
+}
+
+/* ============ 3D TILT & PARALLAX ============ */
+/* Hero visual — allow JS perspective transform, disable float1 animation while tilting */
+.hero-visual{
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+/* Bento cards — JS overrides inline, but set transform-origin for natural pivot */
+.bento-card{
+  transform-origin:center center;
+  will-change:transform;
+}
+/* Audit card 3D */
+.audit-card{
+  will-change:transform;
+  transform-origin:center center;
+}
+/* Particle canvas sits under all hero content */
+#particleCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+}
+/* Make hero children sit above canvas */
+.hero .wrap{position:relative;z-index:1}
+
+/* Section box — subtle inner glow on dark to reinforce depth */
+.section-box{
+  position:relative;
+}
+.section-box::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:radial-gradient(ellipse 60% 40% at 50% 0%, rgba(91,140,255,0.06), transparent 70%);
+  pointer-events:none;
+}
+:root[data-theme="light"] .section-box::before{
+  background:radial-gradient(ellipse 60% 40% at 50% 0%, rgba(37,99,235,0.05), transparent 70%);
+}
+
+/* ============================================================
+   2040 VISUAL LAYER — cursor / orbs / shimmer / neon / borders
+   ============================================================ */
+
+/* ── Custom cursor ─────────────────────────────────────────── */
+body{cursor:none}
+@media(hover:none){body{cursor:auto}}
+.c-cursor{
+  position:fixed;top:0;left:0;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--accent);
+  pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);
+  transition:width .25s ease,height .25s ease,background .25s ease,opacity .25s ease;
+  mix-blend-mode:difference;
+}
+.c-cursor.big{width:44px;height:44px;background:rgba(91,140,255,0.4)}
+.c-cursor.hidden{opacity:0}
+.c-glow{
+  position:fixed;top:0;left:0;
+  width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle, rgba(91,140,255,0.10) 0%, transparent 70%);
+  pointer-events:none;z-index:99998;
+  transform:translate(-50%,-50%);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1);
+}
+:root[data-theme="light"] .c-glow{
+  background:radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
+}
+
+/* ── Hero orbs ─────────────────────────────────────────────── */
+@keyframes orbDrift1{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-30px) scale(1.08)}
+  66%{transform:translate(-25px,20px) scale(0.94)}
+}
+@keyframes orbDrift2{
+  0%,100%{transform:translate(0,0) scale(1)}
+  40%{transform:translate(-50px,40px) scale(1.12)}
+  70%{transform:translate(30px,-15px) scale(0.9)}
+}
+@keyframes orbDrift3{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(20px,30px) scale(1.06)}
+}
+.hero-orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+  filter:blur(90px);z-index:0;
+}
+.hero-orb-1{
+  width:600px;height:600px;
+  top:-15%;right:-10%;
+  background:radial-gradient(circle, rgba(91,140,255,0.28), transparent 70%);
+  animation:orbDrift1 12s ease-in-out infinite;
+}
+.hero-orb-2{
+  width:450px;height:450px;
+  bottom:-5%;left:-8%;
+  background:radial-gradient(circle, rgba(255,91,227,0.22), transparent 70%);
+  animation:orbDrift2 15s ease-in-out infinite 2s;
+}
+.hero-orb-3{
+  width:300px;height:300px;
+  top:40%;left:45%;
+  background:radial-gradient(circle, rgba(196,255,91,0.15), transparent 70%);
+  animation:orbDrift3 10s ease-in-out infinite 4s;
+}
+:root[data-theme="light"] .hero-orb-1{background:radial-gradient(circle, rgba(37,99,235,0.14), transparent 70%)}
+:root[data-theme="light"] .hero-orb-2{background:radial-gradient(circle, rgba(236,72,153,0.12), transparent 70%)}
+:root[data-theme="light"] .hero-orb-3{background:radial-gradient(circle, rgba(101,163,13,0.10), transparent 70%)}
+
+/* ── Hero dot-grid overlay ─────────────────────────────────── */
+.hero-dot-grid{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(rgba(91,140,255,0.18) 1px, transparent 1px);
+  background-size:32px 32px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  opacity:0.5;
+}
+:root[data-theme="light"] .hero-dot-grid{
+  background-image:radial-gradient(rgba(37,99,235,0.12) 1px, transparent 1px);
+}
+
+/* ── Hero scan-line sweep on image ─────────────────────────── */
+@keyframes scanSweep{
+  0%{top:-10%;opacity:0}
+  10%{opacity:0.6}
+  90%{opacity:0.6}
+  100%{top:110%;opacity:0}
+}
+.hero-scanline{
+  position:absolute;inset:0 0 auto 0;height:2px;
+  background:linear-gradient(90deg, transparent, rgba(91,140,255,0.8), rgba(196,255,91,0.6), transparent);
+  animation:scanSweep 4s ease-in-out infinite 2s;
+  pointer-events:none;z-index:10;
+}
+
+/* ── Animated gradient on .accent text ─────────────────────── */
+@keyframes gradShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+h1.hero-title .accent,
+h2.section-title .accent,
+.page1-h .accent{
+  background-size:200% auto;
+  animation:gradShift 5s linear infinite;
+}
+/* Dark mode neon glow on accent */
+:root:not([data-theme="light"]) h1.hero-title .accent,
+:root:not([data-theme="light"]) h2.section-title .accent{
+  filter:drop-shadow(0 0 22px rgba(91,140,255,0.55)) drop-shadow(0 0 6px rgba(255,91,227,0.3));
+}
+
+/* ── Bento card holographic shimmer (::after layer) ────────── */
+.bento-card::after{
+  content:'';
+  position:absolute;inset:0;z-index:2;border-radius:inherit;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.13) 0%, transparent 55%),
+    linear-gradient(135deg,rgba(91,140,255,0.06),rgba(255,91,227,0.06),rgba(196,255,91,0.04));
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.bento-card:hover::after{opacity:1}
+/* Arrow above shimmer */
+.bento-arrow{z-index:3}
+
+/* ── Neon glow on stat numbers ─────────────────────────────── */
+:root:not([data-theme="light"]) .why-num{
+  text-shadow:0 0 40px rgba(91,140,255,0.4), 0 0 80px rgba(91,140,255,0.2);
+}
+:root:not([data-theme="light"]) .stat-num{
+  filter:drop-shadow(0 0 12px rgba(91,140,255,0.35));
+}
+
+/* ── Glowing border animation on section-box ────────────────── */
+@property --box-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes spinAngle{to{--box-angle:360deg}}
+.section-box::after{
+  content:'';
+  position:absolute;
+  inset:-1px;border-radius:calc(var(--r-xl) + 1px);
+  background:conic-gradient(from var(--box-angle),
+    transparent 20%,
+    rgba(91,140,255,0.5) 35%,
+    rgba(255,91,227,0.4) 50%,
+    rgba(196,255,91,0.35) 65%,
+    transparent 80%
+  );
+  z-index:-1;
+  animation:spinAngle 8s linear infinite;
+  opacity:0;
+  transition:opacity .5s ease;
+}
+.section-box:hover::after{opacity:1}
+:root[data-theme="light"] .section-box::after{
+  background:conic-gradient(from var(--box-angle),
+    transparent 20%,
+    rgba(37,99,235,0.4) 35%,
+    rgba(236,72,153,0.35) 50%,
+    rgba(101,163,13,0.3) 65%,
+    transparent 80%
+  );
+}
+
+/* ── Enhanced floating cards — glass glow ───────────────────── */
+.floating-card{
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(91,140,255,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+:root:not([data-theme="light"]) .floating-card{
+  background:rgba(10,10,20,0.75);
+  border-color:rgba(91,140,255,0.25);
+}
+.fc-num{
+  font-size:22px;font-weight:600;font-family:var(--sans);
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:200%;animation:gradShift 4s linear infinite;
+}
+
+/* ── Hero image — glowing border ───────────────────────────── */
+:root:not([data-theme="light"]) .hero-img-wrap{
+  border-color:rgba(91,140,255,0.35);
+  box-shadow:
+    0 0 0 1px rgba(91,140,255,0.2),
+    0 30px 100px rgba(0,0,0,0.5),
+    inset 0 0 80px rgba(91,140,255,0.06);
+}
+
+/* ── Why-card glow on hover ────────────────────────────────── */
+.why-card{
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s ease,box-shadow .35s ease;
+}
+:root:not([data-theme="light"]) .why-card:hover{
+  box-shadow:0 0 40px rgba(91,140,255,0.2), 0 0 1px rgba(91,140,255,0.5);
+  border-color:rgba(91,140,255,0.3);
+}
+
+/* ── Review card shimmer ───────────────────────────────────── */
+.review-card{
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s ease,box-shadow .35s ease;
+  cursor:default;
+}
+:root:not([data-theme="light"]) .review-card:hover{
+  box-shadow:0 20px 60px rgba(0,0,0,0.35), 0 0 0 1px rgba(91,140,255,0.2);
+  transform:translateY(-4px);
+}
+
+/* ── Magnetic button — smooth reset transition ──────────────── */
+.magnetic{will-change:transform;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.magnetic:hover{transition:transform .1s ease}
+
+/* ── Page1 rank cards — neon glow ──────────────────────────── */
+:root:not([data-theme="light"]) .rank-pos.gold{
+  box-shadow:0 0 20px rgba(251,191,36,0.5);
+}
+:root:not([data-theme="light"]) .rank-card{
+  box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(91,140,255,0.2);
+}
+
+/* ── Eyebrow scramble text — mono style ────────────────────── */
+.eyebrow[data-scramble]{font-family:var(--mono)}
+
+/* ── Section-box z-index fix so ::after glow renders ───────── */
+.section-box-wrap{position:relative;z-index:0}
+
+/* ── Inner page hero (sub-pages) ───────────────────────────── */
+.inner-hero{
+  position:relative;
+  overflow:hidden;
+  padding:150px 0 80px;
+}
+.inner-hero>.wrap{
+  position:relative;
+  z-index:1;
+  max-width:860px;
+  margin:0 auto;
+  text-align:center;
+}
+.inner-hero .section-eyebrow{margin-bottom:18px;display:block}
+.inner-hero .section-title{margin-bottom:18px}
+.inner-hero .section-sub{margin-bottom:0}
+/* Dampen orb intensity on inner-hero (smaller viewport section) */
+.inner-hero .hero-orb-1{opacity:.7}
+.inner-hero .hero-orb-2{opacity:.6}
+.inner-hero .hero-orb-3{opacity:.5}
+/* Inner page section-box spacing */
+.inner-section-box-wrap{padding-bottom:40px}
+
+/* ── Page image banner (about/careers) ─────────────────────── */
+.page-img-banner{
+  max-width:1360px;
+  margin:0 auto;
+  padding:0 16px 40px;
+}
+.page-img-banner picture,.page-img-banner img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:520px;
+  object-fit:cover;
+  border-radius:var(--r-xl);
+  box-shadow:0 8px 60px rgba(0,0,0,0.35);
+}
+@media (min-width:900px){.page-img-banner{padding:0 28px 40px}}

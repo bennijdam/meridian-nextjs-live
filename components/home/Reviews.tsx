@@ -21,6 +21,8 @@ function FiveStars() {
 export default function Reviews() {
   return (
     <section className="reviews-section" id="reviews">
+      <div className="section-box-wrap">
+      <div className="section-box">
       <div className="wrap">
         <div className="section-head reveal">
           <span className="section-eyebrow">★ 4.9 / 5 · 127 VERIFIED REVIEWS</span>
@@ -121,6 +123,8 @@ export default function Reviews() {
           <span className="reviews-summary-divider"></span>
           <div className="reviews-summary-item"><strong>94%</strong> client retention beyond 24 months</div>
         </div>
+      </div>
+      </div>
       </div>
     </section>
   );
