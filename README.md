@@ -1,6 +1,6 @@
 # Meridian — London's Digital Performance Studio
 
-Production Next.js 15 site for a London digital marketing agency. **Light theme by default** with dark-mode toggle (Apple visionOS-inspired glossy aesthetic). Engineered for **SEO**, **GEO** (Generative Engine Optimisation), and **AEO** (Answer Engine Optimisation) — designed to rank in Google's top 3 and earn citations from ChatGPT, Claude, Perplexity, and Google AI Overviews.
+Production Next.js 16 site for a London digital marketing agency. **Light theme by default** with dark-mode toggle (Apple visionOS-inspired glossy aesthetic). Engineered for **SEO**, **GEO** (Generative Engine Optimisation), and **AEO** (Answer Engine Optimisation) — designed to rank in Google's top 3 and earn citations from ChatGPT, Claude, Perplexity, and Google AI Overviews.
 
 > **For implementation guidance, see [`CODEX.md`](./CODEX.md).**
 > **For the SEO/GEO/AEO playbook, see [`SEO-GEO-AEO.md`](./SEO-GEO-AEO.md).**
@@ -44,7 +44,7 @@ meridian-nextjs/
 
 | Layer | Choice | Why |
 |---|---|---|
-| Framework | **Next.js 15** (App Router) | RSC by default, Turbopack, Vercel parity |
+| Framework | **Next.js 16** (App Router) | RSC by default, Turbopack, Vercel parity |
 | Runtime | **React 19** | Latest server components |
 | Styling | **Tailwind CSS v4** + custom CSS | Tokens via `@theme`, no config file needed |
 | Animations | **Motion** (formerly Framer Motion) | Best React animation library |
@@ -73,6 +73,14 @@ npm run db:push
 # 4. Run dev
 npm run dev
 # → http://localhost:3000
+```
+
+## Linting
+
+This repo uses **ESLint v9 flat config** (`eslint.config.mjs`). Run:
+
+```bash
+npm run lint
 ```
 
 ## Deploy
