@@ -13,3 +13,6 @@ Note for next agent: [1–2 sentences not obvious from the code]
 
 [2026-04-22 | 15:20] | Agent: GitHub Copilot | Commit: uncommitted | Status: Partial
 Note for next agent: Render now has the live `STRIPE_WEBHOOK_SECRET`, and the Vercel project `meridian-nextjs-live` has imported envs. The first Vercel deployment failed because commit `576548d` still contains the unused import in `app/careers/page.tsx`; the local fix is present but not yet pushed.
+
+[2026-04-22 | 20:15] | Agent: GitHub Copilot | Commit: 2040a07 | Status: Success
+Note for next agent: The careers page unused-import build blocker is now pushed, linting is stabilized for ESLint v9 (flat config + Windows-safe wrapper), and `npm run deploy:preflight` passes locally. Vercel should auto-deploy the latest commit; if it still fails, check Vercel build logs for any env drift.

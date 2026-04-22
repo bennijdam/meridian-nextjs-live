@@ -1,15 +1,8 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { FlatCompat } from '@eslint/eslintrc';
+import nextPlugin from '@next/eslint-plugin-next';
+import reactPlugin from 'eslint-plugin-react';
+import tseslint from 'typescript-eslint';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-export default [
+export default tseslint.config(
   {
     ignores: [
       '**/.next/**',
@@ -19,10 +12,19 @@ export default [
       '**/dist/**',
     ],
   },
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...tseslint.configs.recommended,
+  nextPlugin.configs['core-web-vitals'],
   {
+    plugins: {
+      react: reactPlugin,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     rules: {
       'react/no-unescaped-entities': 'off',
     },
-  },
-];
+  }
+);

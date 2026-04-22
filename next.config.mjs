@@ -2,6 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  // Prevent incorrect monorepo root inference when multiple lockfiles exist.
+  turbopack: {
+    root: process.cwd(),
+  },
+
   // Image optimization — AVIF first, WebP fallback. Massive payload savings.
   images: {
     formats: ['image/avif', 'image/webp'],

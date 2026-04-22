@@ -12,16 +12,17 @@
 - Synced the local and Render `STRIPE_WEBHOOK_SECRET` to the live Stripe webhook signing secret.
 - Created the Vercel project `meridian-nextjs-live`, imported the current environment set, and corrected the Vercel-side `NEXT_PUBLIC_SITE_URL` to the Vercel deployment domain during project creation.
 - Fixed the current production build blocker in `app/careers/page.tsx` by removing an unused import that fails the strict production typecheck.
+- Migrated linting to ESLint v9 flat config (`eslint.config.mjs`) and replaced `next lint` with `npm run lint` running a small wrapper (`scripts/lint.mjs`) for reliability on Windows.
 - Added mandatory documentation-freshness guardrails to both repo-level and app-level `CLAUDE.md` and `CODEX.md`, and created the missing `AGENTS.md` logs.
 
 ### Technical Debt / Risks
-- The first Vercel deployment failed because it built commit `576548d`, which does not include the local `app/careers/page.tsx` fix. A commit/push is still required before redeploying Vercel successfully.
+- The first Vercel deployment failed because it built commit `576548d`, which did not include the `app/careers/page.tsx` fix. That fix is now pushed (commit `2040a07`); the next Vercel build should succeed.
 - Upstash values are still placeholders in both local and hosted environments. Rate limiting is not production-ready until real Upstash credentials are provisioned in Render and Vercel.
 - Shared environment values are now split across local setup, Render, and Vercel. Keep all three in sync when changing public URL or webhook-related keys.
 
 ### Verification
-- `npm run build`
-- Confirm the next Vercel deployment for `meridian-nextjs-live` succeeds after the code fix is pushed.
+- `npm run deploy:preflight`
+- Confirm the next Vercel deployment for `meridian-nextjs-live` succeeds (it should now build from commit `2040a07` or later).
 - Confirm Render and Vercel both contain the real `STRIPE_WEBHOOK_SECRET`.
 
 ---
