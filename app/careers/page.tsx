@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { SERVICES } from '@/lib/services';
 import { jsonLd, breadcrumbSchema } from '@/lib/schema';
 import ApplicationForm from '@/components/ApplicationForm';
 import HomepageInteractions from '@/components/HomepageInteractions';

@@ -8,6 +8,19 @@ The repository ships **complete enough to deploy** — the homepage, service pag
 
 ---
 
+## Documentation Freshness
+
+If a task changes the canonical setup, deployment path, environment requirements, or any other workflow described here, update this file and the related operating docs in the same task.
+
+Keep these files synchronized when guidance changes:
+- `CLAUDE.md`
+- `CODEX.md`
+- `DEPLOYMENT.md`
+- `HANDOVER.md`
+- `AGENTS.md`
+
+---
+
 ## 0. Pre-flight checklist
 
 Before writing any code, create accounts on:

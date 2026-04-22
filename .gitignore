@@ -32,6 +32,11 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# local build captures (do not commit)
+build-*.stdout.log
+build-*.stderr.log
+build-*.log
+
 # env files (do not commit secrets!)
 .env*
 !.env.example

@@ -1,8 +1,16 @@
 # CLAUDE.md — Project Rules for AI Agents
 
 **Project:** Meridian London v3
-**Stack:** Next.js 15 · Tailwind v4 · Drizzle ORM · Neon Postgres · Stripe · Resend
+**Stack:** Next.js 16.2.4 · Tailwind v4 · Drizzle ORM · Neon Postgres · Stripe · Resend
 **Last updated:** 2026-04-16
+
+---
+
+## 0. DOCUMENTATION FRESHNESS — MANDATORY
+
+- If you change implementation, deployment, environment, or workflow details in a way that supersedes an existing document, update that document in the same task.
+- Keep `CLAUDE.md`, `CODEX.md`, `DEPLOYMENT.md`, `HANDOVER.md`, and `AGENTS.md` aligned with the live methodology.
+- Never leave stale instructions for another agent. Replace or explicitly retire obsolete guidance immediately.
 
 ---
 
@@ -108,6 +116,8 @@ After every completed task, update both files:
 [YYYY-MM-DD | HH:MM] | Agent: [Name] | Commit: [short hash or "uncommitted"] | Status: [Success/Partial/Blocker]
 Note for next agent: [1–2 sentences not obvious from the code]
 ```
+
+Before appending your entry, update any superseded document so the log does not point the next agent at stale methodology.
 
 ---
 
