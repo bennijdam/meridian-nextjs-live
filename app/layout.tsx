@@ -47,8 +47,10 @@ export const metadata: Metadata = {
     canonical: SITE,
     languages: { 'en-GB': SITE },
   },
-  other: {
-    "msvalidate.01": "DE91D7C04175E8F794D8C81A2DFEC5C7"
+  verification: {
+    other: {
+      "msvalidate.01": "DE91D7C04175E8F794D8C81A2DFEC5C7",
+    },
   },
   openGraph: {
     type: 'website',
